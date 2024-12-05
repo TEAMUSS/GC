@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Countdown By Team US</title>
+    <style>
+        body {
+            background-image: url('bg.jpg');
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .game-box {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .game-box:hover {
+            transform: scale(1.05);
+        }
+
+        .game-title {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+            color: #ffcc00; /* Gold color for titles */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .game-box img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 9 / 16;
+            border-radius: 10px;
+        }
+
+        .release-date {
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .countdown {
+            margin-top: 5px;
+            font-size: 1em;
+            color: #00ff00; /* Bright green for countdown */
+        }
+
+        .hint {
+            color: red;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Game Countdown By Team US</h1>
+    <div class="container">
+        <div class="game-box">
+            <div class="game-title">Silent Hill 2: Remake</div>
+            <img src="sh.jpg" alt="Silent Hill 2: Remake">
+            <div class="release-date">Release Date: October 8, 2024</div>
+            <div class="countdown" id="countdown1"></div>
+        </div>
+        
+        <div class="game-box">
+            <div class="game-title">A Quiet Place: The Road Ahead</div>
+            <img src="qpg.jpg" alt="A Quiet Place: The Road Ahead">
+            <div class="release-date">Release Date: October 17, 2024</div>
+            <div class="countdown" id="countdown5"></div>
+        </div>
+        
+        <div class="game-box">
+            <div class="game-title">Call of Duty: Black Ops 6</div>
+            <img src="bo6.jpg" alt="Call of Duty: Black Ops 6">
+            <div class="release-date">Release Date: October 25, 2024</div>
+            <div class="countdown" id="countdown4"></div>
+        </div>
+        
+        <div class="game-box">
+            <div class="game-title">Life Is Strange: Double Exposure</div>
+            <img src="lis.jpg" alt="Life Is Strange: Double Exposure">
+            <div class="release-date">Release Date: October 29, 2024</div>
+            <div class="countdown" id="countdown2"></div>
+        </div>
+        
+        <div class="game-box">
+            <div class="game-title">Sinking City 2</div>
+            <img src="sc2.jpg" alt="Sinking City 2">
+            <div class="release-date hint">Release Date: January 1, 2025 <br> <span class="hint">Date may go further</span></div>
+            <div class="countdown" id="countdown3"></div>
+        </div>
+    </div>
+
+    <script>
+        const games = [
+            { id: 'countdown1', date: new Date('2024-10-08T00:00:00') },
+            { id: 'countdown5', date: new Date('2024-10-17T00:00:00') },
+            { id: 'countdown4', date: new Date('2024-10-25T00:00:00') },
+            { id: 'countdown2', date: new Date('2024-10-29T00:00:00') },
+            { id: 'countdown3', date: new Date('2025-01-01T00:00:00') }
+        ];
+
+        function updateCountdown() {
+            games.forEach(game => {
+                const now = new Date();
+                const timeLeft = game.date - now;
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                const countdownElement = document.getElementById(game.id);
+                if (timeLeft > 0) {
+                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    countdownElement.innerHTML = "Released!";
+                }
+            });
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+    </script>
+
+</body>
+</html>
